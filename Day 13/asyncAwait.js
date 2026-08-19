@@ -9,21 +9,3 @@ async function functionName() {
         console.log(error);
     }
 }
-
-async function getUser() {
-    try {
-        const response = await fetch(
-            "https://jsonplaceholder.typicode.com/users/1"
-        );
-
-        if (!response.ok) {
-            throw new Error(`HTTP error: ${response.status}`);
-        }
-
-        const user = await response.json();
-
-        return user;
-    } catch (error) {
-        console.error("Failed to fetch user:", error);
-    }
-}

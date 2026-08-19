@@ -12,7 +12,7 @@ async function getUser() {
 
         console.log("User:", user);
 
-        return user;
+        // return user;
 
     } catch (error) {
         console.error("Failed to fetch user:", error);
