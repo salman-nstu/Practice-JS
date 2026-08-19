@@ -4,6 +4,7 @@ async function getData() {
 
 console.log(getData());
 
+
 async function getNumber() {
     return 100;
 }
