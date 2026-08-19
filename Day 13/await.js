@@ -1,0 +1,13 @@
+async function test() {
+    console.log("A");
+
+    await Promise.resolve();
+
+    console.log("B");
+}
+
+console.log("Start");
+
+test();
+
+console.log("End");
