@@ -12,22 +12,21 @@ async function fetchJSON(url) {
 
 async function loadData() {
     try {
-        const [users, posts, comments] = await Promise.all([
-            fetchJSON(
-                "https://jsonplaceholder.typicode.com/users"
-            ),
-            fetchJSON(
-                "https://jsonplaceholder.typicode.com/posts"
-            ),
-            fetchJSON(
-                "https://jsonplaceholder.typicode.com/comments"
-            )
+        const [dogs, cats, ducks] = await Promise.all([
+            fetchJSON("https://dog.ceo/api/breeds/image/random/3"),
+
+            fetchJSON("https://api.thecatapi.com/v1/images/search?limit=3"),
+
+            Promise.all([
+                fetchJSON("https://random-d.uk/api/v2/random"),
+                fetchJSON("https://random-d.uk/api/v2/random"),
+                fetchJSON("https://random-d.uk/api/v2/random")
+            ])
         ]);
 
-        console.log(users);
-        console.log(posts);
-        console.log(comments);
-
+        console.log(dogs);
+        console.log(cats);
+        console.log(ducks);
     } catch (error) {
         console.error("Failed:", error.message);
     }
