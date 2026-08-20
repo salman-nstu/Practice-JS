@@ -107,65 +107,64 @@ function displayProducts(products) {
 
 
 function createPagination() {
-
     pagination.innerHTML = "";
-
     const totalPages = Math.ceil(totalProducts / limit);
+    const maxVisiblePages = 5;
+    let startPage;
+    let endPage;
 
-    //     for (let page = 1; page <= totalPages; page++) {
+    if (totalPages <= maxVisiblePages) {
+        startPage = 1;
+        endPage = totalPages;
+    } else {
+        const half = Math.floor(maxVisiblePages / 2);
+        startPage = currentPage - half;
+        endPage = currentPage + half;
 
-    //         const button = document.createElement("button");
-
-    //         button.textContent = page;
-
-
-    const pageGroup = Math.floor((currentPage - 1) / 5);
-
-    const startPage = pageGroup * 5 + 1;
-    const endPage = Math.min(startPage + 4, totalPages);
+        if (startPage < 1) {
+            startPage = 1;
+            endPage = maxVisiblePages;
+        }
+        if (endPage > totalPages) {
+            endPage = totalPages;
+            startPage = totalPages - maxVisiblePages + 1;
+        }
+    }
 
     const prevButton = document.createElement("button");
-    prevButton.textContent = "<|";
-    prevButton.disabled = startPage === 1;
-
+    prevButton.innerHTML = "&#8592;";
+    prevButton.disabled = currentPage === 1;
     prevButton.addEventListener("click", () => {
-        currentPage = startPage - 1;
-        fetchProducts(currentPage);
+        if (currentPage > 1) {
+            currentPage--;
+            fetchProducts(currentPage);
+        }
     });
-
     pagination.appendChild(prevButton);
 
-
     for (let page = startPage; page <= endPage; page++) {
-
         const button = document.createElement("button");
-
         button.textContent = page;
-
         if (page === currentPage) {
             button.classList.add("active");
             button.disabled = true;
         }
-
         button.addEventListener("click", () => {
             currentPage = page;
             fetchProducts(currentPage);
         });
-
         pagination.appendChild(button);
     }
 
-
     const nextButton = document.createElement("button");
-    nextButton.textContent = "|>";
-    nextButton.disabled = endPage === totalPages;
-
+    nextButton.innerHTML = "&#8594;";
+    nextButton.disabled = currentPage === totalPages;
     nextButton.addEventListener("click", () => {
-        currentPage = endPage + 1;
-        fetchProducts(currentPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            fetchProducts(currentPage);
+        }
     });
-
     pagination.appendChild(nextButton);
 }
-
 fetchProducts(currentPage);
