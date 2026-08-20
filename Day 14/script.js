@@ -112,6 +112,13 @@ function createPagination() {
 
     const totalPages = Math.ceil(totalProducts / limit);
 
+    //     for (let page = 1; page <= totalPages; page++) {
+
+    //         const button = document.createElement("button");
+
+    //         button.textContent = page;
+
+
     const pageGroup = Math.floor((currentPage - 1) / 5);
 
     const startPage = pageGroup * 5 + 1;
