@@ -21,8 +21,6 @@ async function test() {
 
 test();
 
-const b = await resolve();
-
 console.log("Start");
 
 console.log("End");
